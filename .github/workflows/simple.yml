@@ -4,6 +4,15 @@ on:
   repository_dispatch:
     types:
       - build
+  push:
+    # tags:
+    #   - 'v1.*'
+    branches:
+      - master
+      - 'feature/*' # matches feature/anything
+      - 'feature/**' # matches feature/anything/smhthng
+      - '!feature/featC' #exclude this branch name
+    # branches-ignore: reverse
   pull_request:
     types:
       - opened
@@ -19,17 +28,21 @@ jobs:
           npm -v
   run-checkout-command:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: log files
         run: ls
+        continue-on-error: true
       - name: git action checkout 
         uses: actions/checkout@v2
       - name: log files after checkout
-        run: ls
+        if: failure()
+        run: echo "error occured"
       - name: Simple js action
         id: greet
         uses: actions/hello-world-javascript-action@v1
         with: 
           who-to-greet: John
       - name: Log greet
+        if: always()
         run: echo "${{steps.greet.outputs.time}}"

@@ -16,15 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: log files
-        run: |
-          pwd
-          ls
+        run: ls
       - name: git action checkout 
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: log files after checkout
-        run: |
-          pwd
-          ls
+        run: ls
       - name: Simple js action
         id: greet
         uses: actions/hello-world-javascript-action@v1

@@ -22,7 +22,7 @@ jobs:
       - name: report by slack
         uses: docker://technosophos/slack-notify
         env:
-          SLACK_WEBHOOK: ${{ secret.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: "Hello Slack World"
 
         

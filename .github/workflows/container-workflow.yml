@@ -51,7 +51,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: docker run --name gitcont -p 80:80 -d registry.digitalocean.com/tsaz/static-example:latest
+          script: sudo docker run --name docker-nginx -p 80:80 -d nginx
+          # script: docker run --name gitcont -p 80:80 -d registry.digitalocean.com/tsaz/static-example:latest
   report-message-job:
     runs-on: ubuntu-latest
     steps:

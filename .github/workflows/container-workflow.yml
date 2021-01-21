@@ -23,6 +23,7 @@ jobs:
       - name: Build container image
         run: docker build -t registry.digitalocean.com/tsaz/static-example1:latest .
       
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:

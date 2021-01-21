@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build container image
-        run: docker build -t registry.digitalocean.com/tsaz/static-example:$(echo $GITHUB_SHA | head -c7) .
+        run: docker build -t registry.digitalocean.com/tsaz/static-example:latest .
       
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
@@ -51,7 +51,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: docker run -d -p 80:80 registry.digitalocean.com/tsaz/static-example:$(echo $GITHUB_SHA | head -c7)
+          script: docker run -d -p 80:80 registry.digitalocean.com/tsaz/static-example:latest
   report-message-job:
     runs-on: ubuntu-latest
     steps:

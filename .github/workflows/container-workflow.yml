@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "."
-          target: "test"
+          target: "."
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -51,7 +51,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: docker run -d -p 80:80 registry.digitalocean.com/tsaz/static-example
+          script: docker run -d -p 80:80 registry.digitalocean.com/tsaz/static-example:$(echo $GITHUB_SHA | head -c7)
   report-message-job:
     runs-on: ubuntu-latest
     steps:

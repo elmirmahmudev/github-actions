@@ -1,0 +1,52 @@
+name: Container
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  node-docker-job:
+    runs-on: ubuntu-latest
+    services:
+      app:
+        image: itismelmir/multi-server
+        ports:
+          - 3001:3000
+        
+    steps:
+      - name: Log node -v
+        run: |
+          node -v 
+          cat /etc/os-release
+
+      - name: git action checkout
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "."
+          target: "."
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            sudo docker-compose -f docker-compose.pre.yml build
+            sudo docker-compose -f docker-compose.pre.yml up -d
+      - name: Login to Dockerhub
+        run: sudo docker logout

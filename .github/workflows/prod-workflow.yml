@@ -1,6 +1,9 @@
 name: Container
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   node-docker-job:
@@ -53,11 +56,9 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: | 
-            sudo docker build -t itismelmir/static-example1:latest .
-            sudo docker stop gitcont
-            sudo docker rm gitcont
-            sudo docker run --name gitcont -p 80:80 -d itismelmir/static-example1:latest
+          script: |
+            sudo docker-compose -f docker-compose.prod.yml build
+            sudo docker-compose -f docker-compose.prod.yml up -d
       - name: Login to Dockerhub
         run: sudo docker logout
   report-message-job:

@@ -55,7 +55,9 @@ jobs:
           port: ${{ secrets.PORT }}
           # script: sudo docker run --name docker-nginx -p 80:80 -d nginx
           # script: sudo docker run -d -p 80:80 registry.digitalocean.com/tsaz/static-example1:latest
-          script: sudo docker run --name gitcont -p 80:80 -d itismelmir/static-example1:latest
+          script: | 
+            sudo docker build -t itismelmir/static-example1:latest .
+            sudo docker run --name gitcont -p 80:80 -d itismelmir/static-example1:latest
       - name: Login to Dockerhub
         run: sudo docker logout
   report-message-job:

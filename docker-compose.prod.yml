@@ -4,6 +4,8 @@ services:
     build:
       dockerfile: Dockerfile.prod
       context: .
+    volumes:
+      - ./index.html:/usr/share/nginx/html/
     container_name: webserver
     restart: unless-stopped
     tty: true

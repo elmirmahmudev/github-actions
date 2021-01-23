@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.prod
       context: .
     volumes:
-      - ./index.html:/usr/share/nginx/html/
+      - ./index.html:/etc/nginx/templates/prod
     container_name: webserver
     restart: unless-stopped
     tty: true

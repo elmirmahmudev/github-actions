@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile.pre
       context: .
     volumes:
-      - ./index.html:/usr/share/nginx/dev/
+      - ./index.html:/etc/nginx/templates/pre
     container_name: webserver
     restart: unless-stopped
     tty: true

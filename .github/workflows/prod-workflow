@@ -4,7 +4,7 @@ name: prod-workflow
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   node-docker-job:

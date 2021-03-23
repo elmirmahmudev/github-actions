@@ -8,4 +8,4 @@ tf-plan:
 	terraform plan -var 'do_token=$(DO_TOKEN)' -var 'pvt_key=$(PVT_KEY)'
 
 tf-apply:
-	terraform apply -var 'do_token=$(DO_TOKEN)' -var 'pvt_key=$(PVT_KEY)'
+	terraform apply  -auto-approve -var 'do_token=$(DO_TOKEN)' -var 'pvt_key=$(PVT_KEY)'

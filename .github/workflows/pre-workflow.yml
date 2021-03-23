@@ -36,9 +36,14 @@ jobs:
 
       - run: terraform init
 
-      - id: plan
+      - name: tf plan
+        id: plan
         run: terraform plan -var 'do_token=${{ secrets.DO_TOKEN }}' -var 'pvt_key=~/.ssh/dokey'
 
-      - run: echo ${{ steps.plan.outputs.stdout }}
-      - run: echo ${{ steps.plan.outputs.stderr }}
-      - run: echo ${{ steps.plan.outputs.exitcode }}
+      - name: tf apply
+        id: apply
+        run: terraform apply -var 'do_token=${{ secrets.DO_TOKEN }}' -var 'pvt_key=~/.ssh/dokey'
+      
+      # - run: echo ${{ steps.plan.outputs.stdout }}
+      # - run: echo ${{ steps.plan.outputs.stderr }}
+      # - run: echo ${{ steps.plan.outputs.exitcode }}

@@ -25,11 +25,12 @@ jobs:
       
       - name: create ssh file
         run: |
-          mkdir ~/.ssh
+          mkdir -p ~/.ssh
+          ls -la
           echo "${{ secrets.PVT_KEY_DO_SSH }}" > ~/.ssh/dokey
           chmod 600 ~/.ssh/dokey
           cd .ssh
-          ls
+          ls -la
           cd ..
       
       - name: terraform setup

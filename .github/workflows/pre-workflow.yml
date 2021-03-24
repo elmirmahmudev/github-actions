@@ -28,6 +28,9 @@ jobs:
           mkdir ~/.ssh
           echo "${{ secrets.PVT_KEY_DO_SSH }}" > ~/.ssh/dokey
           chmod 600 ~/.ssh/dokey
+          cd .ssh
+          ls
+          cd ..
       
       - name: terraform setup
         uses: hashicorp/setup-terraform@v1

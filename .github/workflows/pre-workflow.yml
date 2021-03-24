@@ -29,9 +29,9 @@ jobs:
           ls -la
           echo "${{ secrets.PVT_KEY_DO_SSH }}" > ~/.ssh/dokey
           chmod 600 ~/.ssh/dokey
-          cd .ssh
+          cd ~/.ssh
           ls -la
-          cd ..
+          cd ~
       
       - name: terraform setup
         uses: hashicorp/setup-terraform@v1

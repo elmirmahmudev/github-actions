@@ -32,6 +32,11 @@ jobs:
           cd ~/.ssh
           ls -la
           cd ~
+          ls -la
+
+      - name: read dokey
+        run: |
+          echo `cat ~/.ssh/dokey`
       
       - name: terraform setup
         uses: hashicorp/setup-terraform@v1
